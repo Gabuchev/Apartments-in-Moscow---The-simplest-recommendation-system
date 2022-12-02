@@ -1,0 +1,107 @@
+2022-12-02 21:24:37,442:INFO:PyCaret ClusteringExperiment
+2022-12-02 21:24:37,442:INFO:Logging name: cluster-default-name
+2022-12-02 21:24:37,442:INFO:ML Usecase: MLUsecase.CLUSTERING
+2022-12-02 21:24:37,442:INFO:version 3.0.0
+2022-12-02 21:24:37,442:INFO:Initializing setup()
+2022-12-02 21:24:37,442:INFO:self.USI: 8359
+2022-12-02 21:24:37,442:INFO:self.variable_keys: {'gpu_param', 'pipeline', 'imputation_classifier', 'idx', '_all_models_internal', 'USI', 'exp_id', 'experiment__', 'variable_keys', 'master_model_container', '_available_plots', 'imputation_regressor', 'seed', 'data', '_all_metrics', 'log_plots_param', '_gpu_n_jobs_param', '_all_models', 'html_param', 'exp_name_log', 'n_jobs_param', '_ml_usecase', 'display_container', 'X', 'logging_param', 'memory', 'iterative_imputation_iters_param'}
+2022-12-02 21:24:37,443:INFO:Checking environment
+2022-12-02 21:24:37,443:INFO:python_version: 3.9.13
+2022-12-02 21:24:37,443:INFO:python_build: ('main', 'Aug 25 2022 23:51:50')
+2022-12-02 21:24:37,443:INFO:machine: AMD64
+2022-12-02 21:24:37,443:INFO:platform: Windows-10-10.0.19044-SP0
+2022-12-02 21:24:37,443:INFO:Memory: svmem(total=33664430080, available=25175990272, percent=25.2, used=8488439808, free=25175990272)
+2022-12-02 21:24:37,443:INFO:Physical Core: 8
+2022-12-02 21:24:37,443:INFO:Logical Core: 16
+2022-12-02 21:24:37,443:INFO:Checking libraries
+2022-12-02 21:24:37,443:INFO:pd==1.4.4
+2022-12-02 21:24:37,443:INFO:numpy==1.21.5
+2022-12-02 21:24:37,443:INFO:sklearn==1.0.2
+2022-12-02 21:24:37,892:INFO:lightgbm==3.3.3
+2022-12-02 21:24:37,893:WARNING:xgboost not found
+2022-12-02 21:24:37,893:WARNING:catboost not found
+2022-12-02 21:24:37,894:WARNING:mlflow not found
+2022-12-02 21:24:37,894:INFO:Set up data.
+2022-12-02 21:24:37,924:INFO:Assigning column types.
+2022-12-02 21:24:37,957:INFO:Preparing preprocessing pipeline...
+2022-12-02 21:24:37,957:INFO:Set up simple imputation.
+2022-12-02 21:24:38,136:INFO:Finished creating preprocessing pipeline.
+2022-12-02 21:24:38,149:INFO:Creating final display dataframe.
+2022-12-02 21:24:38,163:INFO:Setup display_container:                Description                 Value
+0               Session id                  7652
+1               Data shape           (88705, 72)
+2         Numeric features                    72
+3               Preprocess                  True
+4          Imputation type                simple
+5       Numeric imputation                  mean
+6   Categorical imputation              constant
+7                 CPU Jobs                    -1
+8           Log Experiment                 False
+9          Experiment Name  cluster-default-name
+10                     USI                  8359
+2022-12-02 21:24:38,163:INFO:Preparing display monitor
+2022-12-02 21:25:39,764:INFO:PyCaret ClusteringExperiment
+2022-12-02 21:25:39,765:INFO:Logging name: cluster-default-name
+2022-12-02 21:25:39,765:INFO:ML Usecase: MLUsecase.CLUSTERING
+2022-12-02 21:25:39,765:INFO:version 3.0.0
+2022-12-02 21:25:39,765:INFO:Initializing setup()
+2022-12-02 21:25:39,765:INFO:self.USI: b635
+2022-12-02 21:25:39,765:INFO:self.variable_keys: {'gpu_param', 'pipeline', 'imputation_classifier', 'idx', '_all_models_internal', 'USI', 'exp_id', 'experiment__', 'variable_keys', 'master_model_container', '_available_plots', 'imputation_regressor', 'seed', 'data', '_all_metrics', 'log_plots_param', '_gpu_n_jobs_param', '_all_models', 'html_param', 'exp_name_log', 'n_jobs_param', '_ml_usecase', 'display_container', 'X', 'logging_param', 'memory', 'iterative_imputation_iters_param'}
+2022-12-02 21:25:39,765:INFO:Checking environment
+2022-12-02 21:25:39,765:INFO:python_version: 3.9.13
+2022-12-02 21:25:39,765:INFO:python_build: ('main', 'Aug 25 2022 23:51:50')
+2022-12-02 21:25:39,765:INFO:machine: AMD64
+2022-12-02 21:25:39,765:INFO:platform: Windows-10-10.0.19044-SP0
+2022-12-02 21:25:39,765:INFO:Memory: svmem(total=33664430080, available=24875323392, percent=26.1, used=8789106688, free=24875323392)
+2022-12-02 21:25:39,765:INFO:Physical Core: 8
+2022-12-02 21:25:39,765:INFO:Logical Core: 16
+2022-12-02 21:25:39,765:INFO:Checking libraries
+2022-12-02 21:25:39,765:INFO:pd==1.4.4
+2022-12-02 21:25:39,765:INFO:numpy==1.21.5
+2022-12-02 21:25:39,765:INFO:sklearn==1.0.2
+2022-12-02 21:25:39,765:INFO:lightgbm==3.3.3
+2022-12-02 21:25:39,768:WARNING:xgboost not found
+2022-12-02 21:25:39,769:WARNING:catboost not found
+2022-12-02 21:25:39,770:WARNING:mlflow not found
+2022-12-02 21:25:39,770:INFO:Set up data.
+2022-12-02 21:25:39,809:INFO:Assigning column types.
+2022-12-02 21:25:39,846:INFO:Preparing preprocessing pipeline...
+2022-12-02 21:25:39,846:INFO:Set up simple imputation.
+2022-12-02 21:25:39,897:INFO:Finished creating preprocessing pipeline.
+2022-12-02 21:25:39,900:INFO:Creating final display dataframe.
+2022-12-02 21:25:39,914:INFO:Setup display_container:                Description                 Value
+0               Session id                  7652
+1               Data shape           (88705, 72)
+2         Numeric features                    72
+3               Preprocess                  True
+4          Imputation type                simple
+5       Numeric imputation                  mean
+6   Categorical imputation              constant
+7                 CPU Jobs                    -1
+8           Log Experiment                 False
+9          Experiment Name  cluster-default-name
+10                     USI                  b635
+2022-12-02 21:25:39,914:INFO:Preparing display monitor
+2022-12-02 21:25:39,962:INFO:setup() successfully completed in 0.16s...............
+2022-12-02 21:25:46,902:INFO:Initializing create_model()
+2022-12-02 21:25:46,903:INFO:create_model(self=<pycaret.clustering.oop.ClusteringExperiment object at 0x000001CA8E63DFA0>, estimator=kmeans, num_clusters=4, fraction=0.05, ground_truth=None, round=4, fit_kwargs=None, experiment_custom_tags=None, verbose=True, system=True, add_to_model_list=True, raise_num_clusters=False, display=None, kwargs={})
+2022-12-02 21:25:46,903:INFO:Checking exceptions
+2022-12-02 21:25:46,903:INFO:Preparing display monitor
+2022-12-02 21:25:46,915:INFO:Importing libraries
+2022-12-02 21:25:46,928:INFO:Importing untrained model
+2022-12-02 21:25:46,933:INFO:K-Means Clustering Imported succesfully
+2022-12-02 21:25:46,938:INFO:Fitting Model
+2022-12-02 21:27:26,265:INFO:KMeans(n_clusters=4, random_state=7652)
+2022-12-02 21:27:26,266:INFO:create_models() succesfully completed......................................
+2022-12-02 21:27:26,266:INFO:Uploading results into container
+2022-12-02 21:27:26,268:INFO:Uploading model into container now
+2022-12-02 21:27:26,272:INFO:master_model_container: 1
+2022-12-02 21:27:26,272:INFO:display_container: 2
+2022-12-02 21:27:26,273:INFO:KMeans(n_clusters=4, random_state=7652)
+2022-12-02 21:27:26,273:INFO:create_model() succesfully completed......................................
+2022-12-02 21:27:36,315:INFO:Initializing plot_model()
+2022-12-02 21:27:36,315:INFO:plot_model(fold=None, use_train_data=False, verbose=True, display=None, display_format=None, estimator=KMeans(n_clusters=4, random_state=7652), feature_name=None, fit_kwargs=None, groups=None, label=False, plot=elbow, plot_kwargs=None, save=False, scale=1, self=<pycaret.clustering.oop.ClusteringExperiment object at 0x000001CA8E63DFA0>, system=True)
+2022-12-02 21:27:36,315:INFO:Checking exceptions
+2022-12-02 21:30:05,187:INFO:Initializing plot_model()
+2022-12-02 21:30:05,187:INFO:plot_model(fold=None, use_train_data=False, verbose=True, display=None, display_format=None, estimator=KMeans(n_clusters=4, random_state=7652), feature_name=None, fit_kwargs=None, groups=None, label=False, plot=elbow, plot_kwargs=None, save=False, scale=1, self=<pycaret.clustering.oop.ClusteringExperiment object at 0x000001CA8E63DFA0>, system=True)
+2022-12-02 21:30:05,187:INFO:Checking exceptions
