@@ -13,13 +13,33 @@
 
     <style>
        
-      .third {
-        width: 100%;
+       th, td {
+    border: 2px solid rgb(255, 255, 255);
+}
+
+tr {
+   line-height: 25px;
+   min-height: 25px;
+   height: 25px!important;
+}
+      .third{
+        width: auto;
         background-color: rgb(176, 180, 180);
         display: inline-block;
         text-align: center; 
       }
       
+      body {
+    height: 700px;
+}
+.table100{
+        height: 200px !important;
+        overflow: scroll;
+        border-collapse: collapse;
+        border-spacing: 0px;
+        text-align: center; 
+         }
+
       .icon {
         border: 1px solid rgb(255, 255, 255);
         width: 40px;
@@ -28,40 +48,40 @@
         margin: 10px;
         border-radius: 2px;
       }
-            
+    
       table{
         height: 600px !important;
         overflow: scroll;
+    
          }
 
          html {
           height: auto;
 }
         
-
      </style>
 
 </head>
+
 <body style="background: #77c4f1c5;">
+ 
 <div class="container">
 <div class="third">
   <div class="subscribe"> 
 
 <h3>{{title}}</h3>
 <h5> Для использования рекомендательной системы введите следующие характеристики объекта</h5>
-<form action="{{ url_for('result')}}" method="post" enctype="multipart/form-data">
+<form action="{{ url_for('result')}}" method="post"  enctype="multipart/form-data">
 <p><label>Цена:</label> <input type="number" name="Cost" value="" requied /></p>
 <p><label>Площадь:</label> <input type="number" name="Square" value="" requied /></p>
 <p><label>Этаж:</label> <input type="number" name="Floor" value="" requied /></p>
 <h5> Характеристики дома </h5>
 <p><label>Расстояние до метро:</label> <input type="number" name="Distance" value="" requied /></p>
-<p><label>Этажей в доме:</label> <input type="number" name="Floors" value="" requied /></p>
-<h5> Слова описывающие объект должны быть через пробел, без чисел, в нижнем регистре </h5>
-<p><label>Слова описывающие объект:</label> <input type="text" name="Description" value="" requied /></p>
-<h5> Наименование станции метро </h5>
+<p><label>Этажность дома:</label> <input type="number" name="Floors" value="" requied /></p>
 
+<p><label>Описание * :</label> <input type="text" name="Description" value="" requied /></p>
   <p>
-    <label for= "metro_name"> Название метро</label>
+    <label for= "metro_name"> Наименование станции метро</label>
         <select name="metro_name" id="metro_name" style="width:210px" required>
         <option value="_MISSING_">_MISSING_</option>
         <option value="театральная">театральная</option>
@@ -81,7 +101,7 @@
         <option value="баррикадная">баррикадная</option>
         <option value="маяковская">маяковская</option>
         <option value="краснопресненская">краснопресненская</option>
-        <option value="московский цветной бульвар">московский цветной бульвар</option>
+        <option value="московский цветной бульвар">цветной бульвар</option>
         <option value="тургеневская">тургеневская</option>
         <option value="сретенский бульвар">сретенский бульвар</option>
         <option value="чистые пруды">чистые пруды</option>
@@ -294,7 +314,23 @@
         <option value="говорово">говорово</option>
       </select>
   </p>
-<button type="submit" name="button" class="btn btn-primary btn-block btn-large" > <h5>Получить рекомендации</h5></button>
+
+  <h5> Введенные значения ** </h5>
+  <table class="table100"
+   >
+    {% for row in csv %}
+      <tr>
+      {% for col in row %}
+      <td>{{ col }}</td>
+      {% endfor %}
+      </tr>
+    {% endfor %}
+    </table>
+    <h6> * Ключевые слова (семантическое ядро) </h6>
+    <h6> ** Введенные, вычисляемые и значения по умолчанию </h6>
+<button type="submit"  name="button" class="btn btn-primary btn-block btn-large" > 
+<h5>Получить рекомендации</h5></button>
+
 </form>   
 </div>
 </div>
@@ -331,12 +367,10 @@
           <th data-field="CenterDistance" data-filter-control="input" data-sortable="true">Расстояние до центра</th>
           <th data-field="Floor" data-filter-control="input" data-sortable="true">Этаж</th>
 
-          <th data-field="Floors" data-filter-control="input" data-sortable="true">Этажей в доме</th>
-
+          <th data-field="Floors" data-filter-control="input" data-sortable="true">Этажность дома</th>
           
           <th  data-field="Description" data-sortable="true">Описание</th>
           
-
           <th data-field="CosDis" data-filter-control="select" data-sortable="true">Расстояние Cos</th>
           
           </tr>
@@ -346,7 +380,6 @@
        {% for row in tableD %}
           <tr>
            <!--special characters and spaces not allowed in data-field name-->
-           
            <td>{{row.Rooms}}</td>
            <td>{{row.Cost}}</td>
            <td>{{row.Square}}</td>  
@@ -363,6 +396,7 @@
            </tr>
         {% endfor %}                          
       </tbody>
+     
   </table>
 </div>
 </div>
