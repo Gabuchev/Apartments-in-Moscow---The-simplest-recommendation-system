@@ -3,13 +3,55 @@
 <body style="background: #c9ccccc5;">
  
 <title>{{title}}</title>
-<h1>{{title}}</h1>
 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </article>
 
+<style>
+
+ul {
+    list-style:none;
+    position:relative;
+    left:40%;
+}
+
+h1,h2,h3{
+  text-align:center; 
+
+}
+              a {
+                text-decoration: none; /*убираем подчеркивание текста ссылок*/
+                background:#30A8E6; /*добавляем фон к пункту меню*/
+                color:#fff; /*меняем цвет ссылок*/
+                padding:10px 10px; /*добавляем отступ*/
+                font-family: arial; /*меняем шрифт*/
+                border-radius:4px; /*добавляем скругление*/
+                -moz-transition: all 0.3s 0.01s ease; /*делаем плавный переход*/
+                -o-transition: all 0.3s 0.01s ease;
+                -webkit-transition: all 0.3s 0.01s ease;
+                margin:10px;
+                float:left;
+                text-align:center;        
+              }
+  
+              a:hover {
+                background:#1C85BB;/*добавляем эффект при наведении*/
+              }
+
+              li {
+                float:left; /*Размещаем список горизонтально для реализации меню*/
+                margin-right:5px; /*Добавляем отступ у пунктов меню*/
+
+              }
+              
+        </style>
+
+<h1>{{title}}</h1>
+<div class="container">  
 {% block content -%}
          {%- block mainmenu -%}
          <ul class="mainmenu">
+                
          {% for m in menu -%}
          <li><a href="{{m.url}}">{{m.name}}</a></li>
          {% endfor -%}
@@ -19,7 +61,12 @@
         <div class="content">
 {% endblock -%}
 
+</div>  
+<br><br><br>
+<h3>Курс: “Машинное обучение и управление большими данными”</h3>
 
+<h3>Дипломная работа на тему:</h3>
+<h3>“Рекомендательная система подбора недвижимости”</h3>
 </body>
 
 </html>

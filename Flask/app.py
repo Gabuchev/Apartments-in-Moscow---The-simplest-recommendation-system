@@ -1,28 +1,32 @@
 # importing flask
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request,send_from_directory
 # importing pandas module
 import pandas as pd  
 import pickle 
 import numpy as np
 from sklearn import preprocessing
 from scipy.sparse import csr_matrix
+import re
+import csv
 
 
-
-app = Flask(__name__) 
-menu = [{"name":"ПОДГОТОВКА ДАННЫХ", "url": "base"},
+app = Flask(__name__,static_url_path='') 
+menu = [{"name":"ПРОЕКТ", "url": "base"},
 {"name":"РЕКОМЕНДАЦИИ", "url": "result"},
 ]
 
 @app.route('/', methods=["POST","GET"])
 def index():
-      return render_template('index.html',title ="Рекомендательная система подбора недвижимости", menu = menu)
+      return render_template('index.html',title ="Ознакомительная страница", menu = menu)
 
 @app.route('/base')
 def base():
     #df = pd.read_json(r'C:\Users\Daniel\project university\Csv_to_html\TableA.json')
     #data = df.to_dict('records')
-    return render_template('table.html',title ="ввйцвувцуауцацацуацу",  menu = menu)
+    def send_img(path):
+        return send_from_directory('static', path)
+    
+    return render_template('Rec.html',title ="Проект", menu = menu)
 
 #@app.route('/other')
 #def other():
@@ -46,8 +50,10 @@ def result():
     metro = pd.read_csv(r'C:\Users\Daniel\project university\Csv_to_html\metro.csv',encoding='utf-8')
     DataList = []
 
+
     #Обработка входных данных
     if request.method == 'POST':
+        
 
         Cost = request.form['Cost']
         if Cost == '' :
@@ -84,18 +90,55 @@ def result():
         "floors":Floors, "description":Description,"metro_name":MetroName})
 
         df = pd.DataFrame(DataList).to_csv(r'C:\Users\Daniel\project university\Csv_to_html\Datapredict.csv', index=False)
+
         df= pd.read_csv(r'C:\Users\Daniel\project university\Csv_to_html\Datapredict.csv')
      
         #Получаю столбец с ценой квадратного метра
         df['cost_for_meter(₽)'] =round((df['cost(₽)'])/(df['square(м²)']).astype("float"),1)  # получаю столбец с ценой квадратного метра
 
         df= df[['cost(₽)','square(м²)','cost_for_meter(₽)','metro_name','distance(м)','center_distance/m','floor','floors','description']]#порядок столбцов
+        df.to_csv(r'C:\Users\Daniel\project university\Csv_to_html\Datapredict.csv',index=False)
 
-        df.to_csv(r'C:\Users\Daniel\project university\Csv_to_html\Datapredict.csv')
-             
-        #Обрабатываю слова
-        dfD = df['description'].str.replace(' {2,}', ' ', regex=True)
+   
+
+        dfSecond_value= pd.read_csv(r'C:\Users\Daniel\project university\Csv_to_html\Datapredict.csv')
+        dfSecond_value.rename(columns = {'cost(₽)' : 'Цена','square(м²)' : 'Площадь','cost_for_meter(₽)' : 'Цена за кв.м','metro_name' : 'Название метро', 
+        'distance(м)' : 'Расстояние до метро','center_distance/m' : 'Расстояние до центра','floor' : 'Этаж',
+        'floors' : 'Этажность дома','description' : 'Описание'}, inplace = True) # меняю наименование на корректное
+        dfSecond_value['Этажность дома']=dfSecond_value['Этажность дома'].astype("int")# перевожу Этажность дома в тип int
+        dfSecond_value['Этаж']=dfSecond_value['Этаж'].astype("int")# перевожу Этаж в тип int
+        dfSecond_value.to_csv(r'C:\Users\Daniel\project university\Csv_to_html\dfSecond_value.csv',index=False)
+     
+          
+###################################################################################################################################
+                                            #Обрабатываю слова
+    
+        nlp = pickle.load(open(r"C:\Users\Daniel\project university\Csv_to_html\nlppickle.pkl", "rb"))
+        def cleaning(doc):
+            #Лемматизируется и удаляет стоп-слова
+            # doc должен быть пространственным объектом Doc
+            txt = [token.lemma_ for token in doc if not token.is_stop]
+            return ' '.join(txt)\
+            # если предложение состоит всего из одного или двух слов,
+            # польза от тренинга мала, поэтому
+            #if len(txt) > 0:
+                #return ' '.join(txt)\
+
+        #Удаляю неалфавитные символы:
+        brief_cleaning = (re.sub("[^А-Яа-я]", ' ', str(row)).lower() for row in df['description'])
+
+        # Атрибут space .pipe() для ускорения процесса очистки:
+        # Подбираю оптимальное batch_size=2000, n_process=4
+        
+        txt = [cleaning(doc) for doc in nlp.pipe(brief_cleaning, batch_size=1000, n_process=1)]
+        #Помещаю результаты в фрейм данных
+        dfD = pd.DataFrame({'description': txt})
+        #Удаляю пробелы которых больше или равно 2 и сохраняю данные
+        dfD = dfD['description'].str.replace(' {2,}', ' ', regex=True)
         dfD.to_csv(r'C:\Users\Daniel\project university\Csv_to_html\DD.csv',index=False)
+ 
+###################################################################################################################################
+
         DDf= pd.read_csv(r'C:\Users\Daniel\project university\Csv_to_html\DD.csv')
         
         #Загружаю модель doc2vec
@@ -209,8 +252,13 @@ def result():
         recom_df.to_json(r'C:\Users\Daniel\project university\Csv_to_html\recom_df.json',orient="records")
 
     recom_df = pd.read_json(r'C:\Users\Daniel\project university\Csv_to_html\recom_df.json')
+    #recom_df_D = pd.read_csv(r'C:\Users\Daniel\project university\Csv_to_html\Datapredict.csv')
+    #recom_df_D = pd.read_json(r'C:\Users\Daniel\project university\Csv_to_html\Datapredict.json')
     dataResult = recom_df.to_dict('records')
-    return render_template('result.html',title ="Рекомендации",tableD = dataResult, menu = menu)
+    #dataResult_D = recom_df_D.to_dict('records')
+    
+    reader = csv.reader(open(r"C:\Users\Daniel\project university\Csv_to_html\dfSecond_value.csv",encoding='utf-8') )
+    return render_template('result.html',title ="Рекомендации",tableD = dataResult, csv=reader, menu = menu)
 
 if __name__ == "__main__":
      app.run(debug=True)
