@@ -4,7 +4,7 @@
   <title>{{title}}</title> 
  
     <!-- Required meta tags -->
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Type"  content="text/html; charset=UTF-8">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
@@ -12,8 +12,19 @@
   <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.16.0/extensions/filter-control/bootstrap-table-filter-control.css">
 
     <style>
-       
-       th, td {
+
+#outer
+{
+    width:100%;
+    text-align: center;
+}
+.inner
+{
+    display: inline-block;
+}
+
+
+th, td {
     border: 2px solid rgb(255, 255, 255);
 }
 
@@ -22,25 +33,26 @@ tr {
    min-height: 25px;
    height: 25px!important;
 }
-      .third{
+.third{
         width: auto;
         background-color: rgb(176, 180, 180);
         display: inline-block;
         text-align: center; 
       }
       
-      body {
+body {
     height: 700px;
 }
+
 .table100{
         height: 200px !important;
         overflow: scroll;
         border-collapse: collapse;
         border-spacing: 0px;
         text-align: center; 
-         }
+      }
 
-      .icon {
+.icon {
         border: 1px solid rgb(255, 255, 255);
         width: 40px;
         height: 40px;
@@ -49,7 +61,7 @@ tr {
         border-radius: 2px;
       }
     
-      table{
+table{
         height: 600px !important;
         overflow: scroll;
     
@@ -67,23 +79,23 @@ tr {
  
 <div class="container">
 <div class="third">
-  <div class="subscribe"> 
+<div class="subscribe"> 
 
 <h3>{{title}}</h3>
 <h5> Для использования рекомендательной системы введите следующие характеристики объекта</h5>
 <form action="{{ url_for('result')}}" method="post"  enctype="multipart/form-data">
-<p><label>Цена:</label> <input type="number" name="Cost" value="" requied /></p>
-<p><label>Площадь:</label> <input type="number" name="Square" value="" requied /></p>
-<p><label>Этаж:</label> <input type="number" name="Floor" value="" requied /></p>
+<p><label>Цена:</label> <input type="number" name="Cost" value=""></p>
+<p><label>Площадь:</label> <input type="number" name="Square" value=""></p>
+<p><label>Этаж:</label> <input type="number" name="Floor" value=""></p>
 <h5> Характеристики дома </h5>
-<p><label>Расстояние до метро:</label> <input type="number" name="Distance" value="" requied /></p>
-<p><label>Этажность дома:</label> <input type="number" name="Floors" value="" requied /></p>
+<p><label>Расстояние до метро:</label> <input type="number" name="Distance" value=""></p>
+<p><label>Этажность дома:</label> <input type="number" name="Floors" value=""></p>
 
-<p><label>Описание * :</label> <input type="text" name="Description" value="" requied /></p>
+<p><label>Содержит слова в объявлении * :</label> <input type="text" name="Description" placeholder="на русском языке" value=""></p>
   <p>
-    <label for= "metro_name"> Наименование станции метро</label>
-        <select name="metro_name" id="metro_name" style="width:210px" required>
-        <option value="_MISSING_">_MISSING_</option>
+    <label for= "metro_name"> Наименование станции метро:</label>
+        <select name="metro_name" id="metro_name" style="width:210px">
+        <option value="_MISSING_"> без названия </option>
         <option value="театральная">театральная</option>
         <option value="чеховская">чеховская</option>
         <option value="охотный ряд">охотный ряд</option>
@@ -101,7 +113,7 @@ tr {
         <option value="баррикадная">баррикадная</option>
         <option value="маяковская">маяковская</option>
         <option value="краснопресненская">краснопресненская</option>
-        <option value="московский цветной бульвар">цветной бульвар</option>
+        <option value="цветной бульвар">цветной бульвар</option>
         <option value="тургеневская">тургеневская</option>
         <option value="сретенский бульвар">сретенский бульвар</option>
         <option value="чистые пруды">чистые пруды</option>
@@ -316,8 +328,7 @@ tr {
   </p>
 
   <h5> Введенные значения ** </h5>
-  <table class="table100"
-   >
+  <table class="table100">
     {% for row in csv %}
       <tr>
       {% for col in row %}
@@ -326,18 +337,35 @@ tr {
       </tr>
     {% endfor %}
     </table>
-    <h6> * Ключевые слова (семантическое ядро) </h6>
+    <h6> * Cемантическое ядро </h6>
     <h6> ** Введенные, вычисляемые и значения по умолчанию </h6>
-<button type="submit"  name="button" class="btn btn-primary btn-block btn-large" > 
-<h5>Получить рекомендации</h5></button>
+
+    
+
+    <h4> Тип рекомендаций по: </h4>
+    <div id="outer">
+      <div class="inner"><button type="submit"  name="button" class="btn btn-primary btn-block btn-large" value="all"><h5>Всем признакам</h5></button></div> &nbsp;&nbsp;&nbsp; 
+      <div class="inner"><button type="submit"  name="button" class="btn btn-primary btn-block btn-large" value="cost"><h5>Числовым признакам</h5></button></div> &nbsp;&nbsp;&nbsp; 
+      <div class="inner"><button type="submit"  name="button" class="btn btn-primary btn-block btn-large" value="description"><h5>Описанию</h5></button></div>
+    </div>
+    
+
+    <p>
+      <h4>
+        <p>
+          Рекомендованная цена:  {{ output }} ₽
+        </p>
+      </h4>
+    </p>
+ 
 
 </form>   
 </div>
 </div>
 </div>
-
-<div class="container">
-<div class="table">    
+<!--   <div class="container">   -->
+<div class="table">  
+  
   <table id="table"
   data-toggle="table"
   data-filter-control="true"
@@ -347,21 +375,27 @@ tr {
   data-show-columns="true"
   data-show-columns-toggle-all="true"
   data-page-size="3"
-  data-show-toggle="true" 
-  class="table-responsive table-striped ">
+  data-show-toggle="true"
+   class="table-responsive table-striped ">
   
       <thead class="thead-dark">
           <tr>
            <!--special characters and spaces not allowed in data-field name-->
+
+          <th data-field="id" data-filter-control="select" data-sortable="true">Номер</th>
+
+          <th data-field="Cos_dist" data-filter-control="select" data-sortable="true">Расстояние Cos</th>
           
-          <th data-field="Rooms" data-filter-control="select"  data-sortable="true">Планировка</th>
+          <th data-field="rooms" data-filter-control="select"  data-sortable="true">Планировка</th>
+
           <th data-field="Cost" data-filter-control="input" data-sortable="true">Цена</th>
+
           <th data-field="Square" data-filter-control="input" data-sortable="true">Площадь</th>
 
           <th data-field="CostForMeter" data-filter-control="input" data-sortable="true">Цена за кв.м</th>       
-          <th data-field="Addres" data-filter-control="select" data-sortable="true">Адрес</th>
+          <th data-field="address" data-filter-control="select" data-sortable="true">Адрес</th>
 
-          <th data-field="MetroName" data-filter-control="select" data-sortable="true">Станция метро</th>
+          <th data-field="metro_name" data-filter-control="select" data-sortable="true">Станция метро</th>
           <th data-field="Distance" data-filter-control="input" data-sortable="true">Расстояние до метро</th>
 
           <th data-field="CenterDistance" data-filter-control="input" data-sortable="true">Расстояние до центра</th>
@@ -371,8 +405,6 @@ tr {
           
           <th  data-field="Description" data-sortable="true">Описание</th>
           
-          <th data-field="CosDis" data-filter-control="select" data-sortable="true">Расстояние Cos</th>
-          
           </tr>
       </thead>
 
@@ -380,27 +412,28 @@ tr {
        {% for row in tableD %}
           <tr>
            <!--special characters and spaces not allowed in data-field name-->
-           <td>{{row.Rooms}}</td>
+           <td>{{row.id}}</td>
+           <td>{{row.Cos_dist}}</td>
+           <td>{{row.rooms}}</td>
            <td>{{row.Cost}}</td>
            <td>{{row.Square}}</td>  
            <td>{{row.CostForMeter}}</td>  
-           <td>{{row.Addres}}</td>  
-           <td>{{row.MetroName}}</td>
+           <td>{{row.address}}</td>  
+           <td>{{row.metro_name}}</td>
            <td>{{row.Distance}}</td>
            <td>{{row.CenterDistance}}</td>
            <td>{{row.Floor}}</td>
            <td>{{row.Floors}}</td>
            <td>{{row.Description}}</td>
-           <td>{{row.CosDis}}</td>
-
-           </tr>
+               </tr>
         {% endfor %}                          
       </tbody>
      
   </table>
-</div>
-</div>
 
+<!-- </div> -->
+</div>
+</div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
