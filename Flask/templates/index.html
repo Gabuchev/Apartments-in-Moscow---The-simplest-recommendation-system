@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<body style="background: #c9ccccc5;">
+<body >
  
 <title>{{title}}</title>
 
@@ -9,11 +9,23 @@
 
 <style>
 
+
+body {
+  
+  background-image: url('33.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+
 ul {
     list-style:none;
     position:relative;
     left:40%;
 }
+
+html {
+font-size: 115%}
 
 h1,h2,h3{
   text-align:center; 
@@ -21,7 +33,7 @@ h1,h2,h3{
 }
               a {
                 text-decoration: none; /*убираем подчеркивание текста ссылок*/
-                background:#30A8E6; /*добавляем фон к пункту меню*/
+                background:#007bff; /*добавляем фон к пункту меню*/
                 color:#fff; /*меняем цвет ссылок*/
                 padding:10px 10px; /*добавляем отступ*/
                 font-family: arial; /*меняем шрифт*/
@@ -35,7 +47,7 @@ h1,h2,h3{
               }
   
               a:hover {
-                background:#1C85BB;/*добавляем эффект при наведении*/
+                background:#06f;/*добавляем эффект при наведении*/
               }
 
               li {
@@ -53,7 +65,7 @@ h1,h2,h3{
          <ul class="mainmenu">
                 
          {% for m in menu -%}
-         <li><a href="{{m.url}}">{{m.name}}</a></li>
+         <li><a  href="{{m.url}}">{{m.name}}</a></li>
          {% endfor -%}
         </ul>
          {% endblock mainmenu -%}
@@ -65,7 +77,7 @@ h1,h2,h3{
 <br><br><br>
 <h3>Курс: “Машинное обучение и управление большими данными”</h3>
 
-<h3>Дипломная работа на тему:</h3>
+<h3>Квалификационная работа на тему:</h3>
 <h3>“Коллаборативная система подбора недвижимости”</h3>
 </body>
 
